@@ -9,11 +9,15 @@ if [[ -z $prisma_file ]]; then
   exit 1
 fi
 
+# Create a backup of the original Prisma schema file
+backup_file="${prisma_file}.bak"
+cp "$prisma_file" "$backup_file"
+
 # Remove generator and datasource blocks from the Prisma schema file
-sed -i '/^generator\|datasource/,/^\}/d' "$prisma_file"
+sed -i '/^generator\|datasource/,/^\}/d' "$backup_file"
 
 # Read the modified content of the Prisma schema file
-prisma_content=$(cat "$prisma_file")
+prisma_content=$(cat "$backup_file")
 
 # Print the modified content
 echo "Prisma schema file content (after removing generator and datasource blocks):"
