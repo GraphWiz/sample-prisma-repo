@@ -44,3 +44,5 @@ response_text=$(echo "$response" | jq -r '.response.text')
 echo "$response_text" > erd-output.md
 
 rm -f "$backup_file"
+
+cat erd-output.md
