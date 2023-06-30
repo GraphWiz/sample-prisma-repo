@@ -17,13 +17,10 @@ jobs:
         run: |
           chmod +x generate.sh
           ./generate.sh ${{ secrets.ENDPOINT }} ${{ secrets.X_API_HEADER }}
-      
-      - name: Render images for every Mermaid diagram in all Markdown files (*.md) in the repo
-        uses: nielsvaneck/render-md-mermaid@v1
 
       - name: Commit rendered png and svg files
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          file_pattern: "*[.svg,.png]"
+          file_pattern: "*[.svg,.png,.md]"
           commit_message: Automatically rendered mermaid diagrams (${{ github.sha }})
       
