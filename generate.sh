@@ -41,8 +41,10 @@ response=$(curl -X POST \
 response_text=$(echo "$response" | jq -r '.response.text')
 
 # Save the response text to a markdown file
-echo "$response_text" > erd-output.md
+echo "$response_text" > erd-output.mmd
 
 rm -f "$backup_file"
 
-cat erd-output.md
+echo "```mermaid value" > erd-output.mmd
+echo "```" >> erd-output.mmd
+cat erd-output.mmd
